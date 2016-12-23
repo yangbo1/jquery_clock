@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8"/>
+		<link href="css/clock.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div id="clock" class="light">
+
+			<div class="display">
+				<!--星期-->
+				<div class="weekdays">
+					<span class="active">SUN</span>
+					<span>MON</span>
+					<span>TUE</span>
+					<span>WED</span>
+					<span>THU</span>
+					<span>FRI</span>
+					<span>SAT</span>
+				</div>
+				<!--数字时间-->
+				<div class="digits">
+					<!--时间的第一位-->
+					<div class="one" id="h1">
+					<span class="d1"></span>
+					<span class="d2"></span>
+					<span class="d3"></span>
+					<span class="d4"></span>
+					<span class="d5"></span>
+					<span class="d6"></span>
+					<span class="d7"></span>
+					</div>
+					<!--第二位-->
+					<div class="two" id="h2">
+						<span class="d1"></span>
+						<span class="d2"></span>
+						<span class="d3"></span>
+						<span class="d4"></span>
+						<span class="d5"></span>
+						<span class="d6"></span>
+						<span class="d7"></span>
+					</div>
+					<!--时间分隔符 :-->
+					<div class="dots"></div>
+					<!--第三位-->
+					<div class="three" id="m1">
+						<span class="d1"></span>
+						<span class="d2"></span>
+						<span class="d3"></span>
+						<span class="d4"></span>
+						<span class="d5"></span>
+						<span class="d6"></span>
+						<span class="d7"></span>
+					</div>
+					<!--第四位-->
+					<div class="four" id="m2">
+						<span class="d1"></span>
+						<span class="d2"></span>
+						<span class="d3"></span>
+						<span class="d4"></span>
+						<span class="d5"></span>
+						<span class="d6"></span>
+						<span class="d7"></span>
+					</div>
+					<!--:-->
+					<div class="dots"></div>
+					<!--第五位-->
+					<div class="five" id="s1">
+						<span class="d1"></span>
+						<span class="d2"></span>
+						<span class="d3"></span>
+						<span class="d4"></span>
+						<span class="d5"></span>
+						<span class="d6"></span>
+						<span class="d7"></span>
+					</div>
+					<!--第六位-->
+					<div class="six" id="s2">
+						<span class="d1"></span>
+						<span class="d2"></span>
+						<span class="d3"></span>
+						<span class="d4"></span>
+						<span class="d5"></span>
+						<span class="d6"></span>
+						<span class="d7"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="http://libs.useso.com/js/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
+	</body>
+	<script>
+		$(function () {
+			//设置时间的class的默认值
+			var time = 'zero one two three four five six seven eight nine'.split(' ');
+			(function updatetime() {
+				//获取时间
+				//HH:00到23 mm:00到59 ss:01到59 d: 0到6，0表示周日，6表示周六
+				var now = moment().format("HHmmssd");
+				//分别给时分秒重置class
+				$("#h1").attr("class",time[now[0]]);
+				$("#h2").attr("class",time[now[1]]);
+				$("#m1").attr("class",time[now[2]]);
+				$("#m2").attr("class",time[now[3]]);
+				$("#s1").attr("class",time[now[4]]);
+				$("#s2").attr("class",time[now[5]]);
+				//得到星期
+				var day = now[6];
+				//给星期重置class
+				$(".weekdays span").removeClass("active").eq(day).addClass("active");
+				//每一秒更新一次时间
+				setTimeout(updatetime, 1000);
+			})();
+		});
+	</script>
+</html>
